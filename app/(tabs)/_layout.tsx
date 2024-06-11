@@ -1,37 +1,88 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import {
+  Entypo,
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Ionicons,
+  FontAwesome,
+} from "@expo/vector-icons";
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { Tabs } from "expo-router";
+import { Text, View } from "react-native";
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "black",
+        tabBarStyle: {
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+          height: 70,
+          elevation: 0,
+          backgroundColor: "white",
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+          tabBarIcon: ({ color }) => (
+            <View className="items-center space-y-1 ">
+              <Entypo name="home" size={24} color={color} />
+              <Text className="text-xs font-plight" style={{ color: color }}>
+                Home
+              </Text>
+            </View>
+          ),
+          tabBarBadge: "1",
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="wardrobe"
+        options={{
+          title: "Wardrobe",
+          tabBarIcon: ({ color }) => (
+            <View className="items-center space-y-1">
+              <MaterialCommunityIcons name="wardrobe" size={24} color={color} />
+              <Text className="text-xs font-plight" style={{ color: color }}>
+                Wardrobe
+              </Text>
+            </View>
           ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+          title: "Explore",
+          tabBarIcon: ({ color }) => (
+            <View className="items-center space-y-1">
+              <MaterialIcons name="explore" size={24} color={color} />
+              <Text className="text-xs font-plight" style={{ color: color }}>
+                Explore
+              </Text>
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color }) => (
+            <View className="items-center space-y-1">
+              <FontAwesome name="user" size={24} color={color} />
+              <Text className="text-xs font-plight" style={{ color: color }}>
+                Profile
+              </Text>
+            </View>
           ),
         }}
       />
     </Tabs>
   );
-}
+};
+
+export default TabLayout;
